@@ -9,7 +9,10 @@ Por otro lado, además de montar dicha topología, el cliente también requiere 
 
 ## MONTAJE
 
+### PROCEDIMIENTO.
 
+3. Se requiere tanto asignación dinámica como estática. En la red en la cuál están los servidores DNS y HTTP es recomendable usar una asignación estática, ya que dentro de la topología y el problema planteado no se contempla la necesidad de  como si ocurre tanto en las redes de Bogotá y Madrid, en las cuales existe hasta una subred para los invitados, lo cuál indica que lo más óptimo esa hacer uso de la asignación dinámica a través de DHCP.
+4. Se configura el servicio de ACL(Access Control List) el cual nos permite permitir o denegar el paso de paquetes desde una red hacia otra, o por ip's específicas de dispositivos.
 
 ### METODOLOGÍA SEGUIDA.
 
