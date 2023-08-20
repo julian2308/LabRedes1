@@ -1,6 +1,15 @@
 # Lab #1 - Redes y Servicios IPv4
 
-## Presentado por: Julián(Alvarado + Durán + Pinilla).
+## Presentado por: Julián (Alvarado + Durán + Pinilla).
+
+## CONTEXTO DEL PROBLEMA
+Un cliente de tipo empresarial le solicita un servicio de instalación de redes a la empresa Julianes SAS. Este cliente tiene como necesidad montar una red en Bogotá y otra en Madrid las cuales sean capaces de comunicarse y acceder a los servicios de unos servidores. La red en Bogotá requiere ser segmentada entre clientes, empleados, accesorios como impresoras junto con servidores y telefonos IP. Para la red de Madrid, al igual que en la de Bogotá, también debe ser segmentada entre clientes, empleados, accesorios como impresoras junto con servidores y telefonos IP. 
+Por otro lado, además de montar dicha topología, el cliente también requiere que se haga una administración de los servicios que se pueden acceder desde las diferentes redes. En la red Intranet Bog todos los usuarios deben poder acceder a los servicios web a través del protocolo HTTPS (puerto 443) salvo los usuarios de la red "Invitados" que accederan por HTTP(puerto 80). Para la red de Madrid, los usuarios de la red "invitados" deben estar restringidos de acceder a cualquier servicio web y los que hagan parte de la empresa conectarse a través de HTTPS(puerto 443). El cliente solicita que el montaje sea con la topología evaluada de acuerdo con su capital, siendo la siguiente:
+![image](https://github.com/julian2308/LabRedes1/assets/110574175/da6a33db-6cdc-4bf2-9a77-50c7f291638d)
+
+## MONTAJE
+
+
 
 ### METODOLOGÍA SEGUIDA.
 
@@ -14,6 +23,35 @@
 * WAN: "Una red de área amplia (WAN) es la tecnología que conecta entre sí a las oficinas, los centros de datos, las aplicaciones en la nube y el almacenamiento en la nube" [8].
 * ACL: "Una lista de control de acceso (ACL) de red permite o deniega el tráfico entrante o saliente específico en el nivel de subred. Puede usar la ACL de red predeterminada para su VPC o puede crear una ACL de red personalizada para su VPC con reglas similares a las reglas de sus grupos de seguridad para agregar una capa de seguridad adicional a su VPC" [9].
 * EIGRP: "EIGRP (Enhanced Interior Gateway Routing Protocol) es un protoco- lo de enrutamiento propietario de Cisco, concebido para que funcione en aquellas redes implementadas solamente con equipos marca Cisco" [10].
+* NAT(Network address transalation): "Consiste en consiste en coger una dirección IP privada y traducirla a una dirección IP pública o viceversa".[11]
+
+Dispositivos Utilizados:
+
+- PC-PT.
+- Server-PT.
+- Switch (2960).
+- Router (2811).
+- Printer
+- IP Phone
+- Multilayer Switch
+
+
+## AGENDA DEL PROYECTO
+
+### Jueves 10 de Agosto:
+Análisis de la topología a montar, lectura y entendimiento del documento, repartición básica de las tareas.
+Alvarado: Servidores DNS y Web.
+Durán: Configuración de routers.
+Pinilla: Montaje básico de la INTRANET BOG e INTRANET MAD.
+
+### Jueves 17 de Agosto:
+Reporte de avances y corrección de errores de conexión. Socialización de posibles soluciones.
+Alvarado: Configuración del ACL
+Durán: Troubleshooting del protocolo EIGRP
+Pinilla: Configuración del Multilayer-switch y Vlans
+
+### Domingo 20 de Agosto:
+Corrección final de errores y grabación del vídeo.
 
 ### REFERENCIAS
 * [1] Fragmento tomado de: "https://concepto.de/red-lan/#ixzz7xxuZ6gL7"
@@ -26,3 +64,6 @@
 * [8] Fragmento tomado de: "https://aws.amazon.com/es/what-is/wan/#:~:text=Una%20red%20de%20%C3%A1rea%20amplia%20(WAN)%20es%20la%20tecnolog%C3%ADa%20que,el%20almacenamiento%20en%20la%20nube."
 * [9] Fragmento tomado de: "https://docs.aws.amazon.com/es_es/vpc/latest/userguide/vpc-network-acls.html"
 * [10] Fragmento tomado de: "https://libros.univalle.edu.co/index.php/programaeditorial/catalog/download/53/4/185?inline=1#:~:text=DE%20ENCAMINAMIENTO%20IP-,EIGRP%20(Enhanced%20Interior%20Gateway%20Routing%20Protocol)%20es%20un%20protoco%2D,solamente%20con%20equipos%20marca%20Cisco."
+* [11] Fragmento tomado de: "https://openwebinars.net/blog/nat-que-es-y-para-que-sirve/"
+* [12] " Configuracion de Inter-VLAN Routing (Multilayer Switch) - Parte 2 " - https://www.youtube.com/watch?v=VOX3gNV0Q58&ab_channel=JorgeArmijo
+* [13] "Configuracion Vlan con routers + eigrp" - https://www.youtube.com/watch?v=MY6wPJD_Y7E
