@@ -92,3 +92,4 @@ Corrección final de errores y grabación del vídeo.
 * [12] " Configuracion de Inter-VLAN Routing (Multilayer Switch) - Parte 2 " - https://www.youtube.com/watch?v=VOX3gNV0Q58&ab_channel=JorgeArmijo
 * [13] "Configuracion Vlan con routers + eigrp" - https://www.youtube.com/watch?v=MY6wPJD_Y7E
 * [14] "Configuring IP Addressing and IP Services Features. Cisco Documentation"
+* [15] "Default static route" - https://study-ccna.com/default-static-route/
