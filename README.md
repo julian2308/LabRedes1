@@ -5,20 +5,27 @@
 ## CONTEXTO DEL PROBLEMA
 Un cliente de tipo empresarial le solicita un servicio de instalación de redes a la empresa Julianes SAS. Este cliente tiene como necesidad montar una red en Bogotá y otra en Madrid las cuales sean capaces de comunicarse y acceder a los servicios de unos servidores. La red en Bogotá requiere ser segmentada entre clientes, empleados, accesorios como impresoras junto con servidores y telefonos IP. Para la red de Madrid, al igual que en la de Bogotá, también debe ser segmentada entre clientes, empleados, accesorios como impresoras junto con servidores y telefonos IP. 
 Por otro lado, además de montar dicha topología, el cliente también requiere que se haga una administración de los servicios que se pueden acceder desde las diferentes redes. En la red Intranet Bog todos los usuarios deben poder acceder a los servicios web a través del protocolo HTTPS (puerto 443) salvo los usuarios de la red "Invitados" que accederan por HTTP(puerto 80). Para la red de Madrid, los usuarios de la red "invitados" deben estar restringidos de acceder a cualquier servicio web y los que hagan parte de la empresa conectarse a través de HTTPS(puerto 443). El cliente solicita que el montaje sea con la topología evaluada de acuerdo con su capital, siendo la siguiente:
+
 ![image](https://github.com/julian2308/LabRedes1/assets/110574175/da6a33db-6cdc-4bf2-9a77-50c7f291638d)
 
 ## MONTAJE
 
 ### PROCEDIMIENTO.
 1. Primero que todo, se monta la topologia en cisco, presentada por el cliente siendo:
+
 ![image](https://github.com/julian2308/LabRedes1/assets/88839459/9c9f5392-ab13-4e59-a97f-e51e0b792fa1)
+
 
 2. Para las intranet de la empresa, nos dan disponibilidad el espacio de direccionamiento, Red “Intranet BOG”: 172.163.0.0/16 y Red “Intranet MAD”: 10.3.0.0/8, y nos exigen realizar el subneteo para las siguientes 5 VLANS; Internos, Invitados, Servidores e Impresoras, VOIP y La nativa.
 Con el metodo aprendido en clase y un analisis que pueda satisfacer a nuestros clientes, llegamos a la conclusion que la VLAN que necesita mayor capacidad, es la de Internos, ya que es una empresa con mucho personal y pocos invitados, al ser una emisora de valores
-Teniendo una division de subredes asi:![image](https://github.com/julian2308/LabRedes1/assets/88839459/e8ed9dc6-9502-42cf-b896-88017f94257b)
+Teniendo una division de subredes asi:
+![image](https://github.com/julian2308/LabRedes1/assets/88839459/e8ed9dc6-9502-42cf-b896-88017f94257b)
+
 Con su respectiva asignacion de VLANes a sus puertos:
+
 ![image](https://github.com/julian2308/LabRedes1/assets/88839459/fd2fb345-95a1-4be6-8167-10b7f47d19ea)
-3. Se configuraron los switches y Routers para la cominucacion de dispositivos entre VLANs, al usar las notas de clase y la documentacion de Cisco [14].
+
+4. Se configuraron los switches y Routers para la cominucacion de dispositivos entre VLANs, al usar las notas de clase y la documentacion de Cisco [14].
 Esta configuracion consistia principalmente en las claves para los modos privilegiados, el nombre y el mensaje del dispositivo, la creacion de las VLANs con su nombre, sus interfaces y la IP para la VLAN nativa(VLAN 99)
 A cada una de estas VLANs se les asigna unos determinados puertos del Switch y su modo, siendo de acceso, o para las VLAN nativa, truncado.
 Para el router, se crea una interfaz que se asocia en al puerto conectado al switch de nuestra LAN, y unas subinterfacez con la encapsulation dot1q, que se asocian a cada VLAN de nuestra Red LAN.
