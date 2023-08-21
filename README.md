@@ -10,9 +10,22 @@ Por otro lado, además de montar dicha topología, el cliente también requiere 
 ## MONTAJE
 
 ### PROCEDIMIENTO.
+1. Primero que todo, se monta la topologia en cisco, presentada por el cliente siendo:
+![image](https://github.com/julian2308/LabRedes1/assets/88839459/9c9f5392-ab13-4e59-a97f-e51e0b792fa1)
 
-3. Se requiere tanto asignación dinámica como estática. En la red en la cuál están los servidores DNS y HTTP es recomendable usar una asignación estática, ya que dentro de la topología y el problema planteado no se contempla la necesidad de  como si ocurre tanto en las redes de Bogotá y Madrid, en las cuales existe hasta una subred para los invitados, lo cuál indica que lo más óptimo esa hacer uso de la asignación dinámica a través de DHCP.
-4. Se configura el servicio de ACL(Access Control List) el cual nos permite permitir o denegar el paso de paquetes desde una red hacia otra, o por ip's específicas de dispositivos.
+2. Para las intranet de la empresa, nos dan disponibilidad el espacio de direccionamiento, Red “Intranet BOG”: 172.163.0.0/16 y Red “Intranet MAD”: 10.3.0.0/8, y nos exigen realizar el subneteo para las siguientes 5 VLANS; Internos, Invitados, Servidores e Impresoras, VOIP y La nativa.
+Con el metodo aprendido en clase y un analisis que pueda satisfacer a nuestros clientes, llegamos a la conclusion que la VLAN que necesita mayor capacidad, es la de Internos, ya que es una empresa con mucho personal y pocos invitados, al ser una emisora de valores
+Teniendo una division de subredes asi:![image](https://github.com/julian2308/LabRedes1/assets/88839459/e8ed9dc6-9502-42cf-b896-88017f94257b)
+Con su respectiva asignacion de VLANes a sus puertos:
+![image](https://github.com/julian2308/LabRedes1/assets/88839459/fd2fb345-95a1-4be6-8167-10b7f47d19ea)
+3. Se configuraron los switches y Routers para la cominucacion de dispositivos entre VLANs, al usar las notas de clase y la documentacion de Cisco [14].
+Esta configuracion consistia principalmente en las claves para los modos privilegiados, el nombre y el mensaje del dispositivo, la creacion de las VLANs con su nombre, sus interfaces y la IP para la VLAN nativa(VLAN 99)
+A cada una de estas VLANs se les asigna unos determinados puertos del Switch y su modo, siendo de acceso, o para las VLAN nativa, truncado.
+Para el router, se crea una interfaz que se asocia en al puerto conectado al switch de nuestra LAN, y unas subinterfacez con la encapsulation dot1q, que se asocian a cada VLAN de nuestra Red LAN.
+
+
+5. Se requiere tanto asignación dinámica como estática. En la red en la cuál están los servidores DNS y HTTP es recomendable usar una asignación estática, ya que dentro de la topología y el problema planteado no se contempla la necesidad de  como si ocurre tanto en las redes de Bogotá y Madrid, en las cuales existe hasta una subred para los invitados, lo cuál indica que lo más óptimo esa hacer uso de la asignación dinámica a través de DHCP.
+6. Se configura el servicio de ACL(Access Control List) el cual nos permite permitir o denegar el paso de paquetes desde una red hacia otra, o por ip's específicas de dispositivos.
 
 ### METODOLOGÍA SEGUIDA.
 
@@ -70,3 +83,4 @@ Corrección final de errores y grabación del vídeo.
 * [11] Fragmento tomado de: "https://openwebinars.net/blog/nat-que-es-y-para-que-sirve/"
 * [12] " Configuracion de Inter-VLAN Routing (Multilayer Switch) - Parte 2 " - https://www.youtube.com/watch?v=VOX3gNV0Q58&ab_channel=JorgeArmijo
 * [13] "Configuracion Vlan con routers + eigrp" - https://www.youtube.com/watch?v=MY6wPJD_Y7E
+* [14] "Configuring IP Addressing and IP Services Features. Cisco Documentation"
