@@ -19,6 +19,7 @@ Por otro lado, además de montar dicha topología, el cliente también requiere 
 2. Para las intranet de la empresa, nos dan disponibilidad el espacio de direccionamiento, Red “Intranet BOG”: 172.163.0.0/16 y Red “Intranet MAD”: 10.3.0.0/8, y nos exigen realizar el subneteo para las siguientes 5 VLANS; Internos, Invitados, Servidores e Impresoras, VOIP y La nativa.
 Con el metodo aprendido en clase y un analisis que pueda satisfacer a nuestros clientes, llegamos a la conclusion que la VLAN que necesita mayor capacidad, es la de Internos, ya que es una empresa con mucho personal y pocos invitados, al ser una emisora de valores
 Teniendo una division de subredes asi:
+
 ![image](https://github.com/julian2308/LabRedes1/assets/88839459/e8ed9dc6-9502-42cf-b896-88017f94257b)
 
 Con su respectiva asignacion de VLANes a sus puertos:
