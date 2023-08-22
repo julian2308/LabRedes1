@@ -10,10 +10,8 @@ Por otro lado, además de montar dicha topología, el cliente también requiere 
 
 ## MONTAJE
 
-### PROCEDIMIENTO.
-1. Primero que todo, se monta la topologia en cisco, presentada por el cliente siendo:
-
-![image](https://github.com/julian2308/LabRedes1/assets/88839459/9c9f5392-ab13-4e59-a97f-e51e0b792fa1)
+### PROCEDIMIENTO y RESPUESTA DE PREGUNTAS.
+1. Primero que todo, se monta la topologia en cisco, presentada por el cliente.
 
 
 2. Para las intranet de la empresa, nos dan disponibilidad el espacio de direccionamiento, Red “Intranet BOG”: 172.163.0.0/16 y Red “Intranet MAD”: 10.3.0.0/8, y nos exigen realizar el subneteo para las siguientes 5 VLANS; Internos, Invitados, Servidores e Impresoras, VOIP y La nativa.
@@ -21,21 +19,52 @@ Con el metodo aprendido en clase y un analisis que pueda satisfacer a nuestros c
 Teniendo una division de subredes asi:
 
 ![image](https://github.com/julian2308/LabRedes1/assets/88839459/e8ed9dc6-9502-42cf-b896-88017f94257b)
+![image](https://github.com/julian2308/LabRedes1/assets/88839459/4e95c8c7-dffd-4ef1-ba16-870717154b48)
 
 Con su respectiva asignacion de VLANes a sus puertos:
+![image](https://github.com/julian2308/LabRedes1/assets/88839459/666aa080-54a2-492b-8250-b66f6f65da21)
 
-![image](https://github.com/julian2308/LabRedes1/assets/88839459/fd2fb345-95a1-4be6-8167-10b7f47d19ea)
 
 4. Se configuraron los switches y Routers para la cominucacion de dispositivos entre VLANs, al usar las notas de clase y la documentacion de Cisco [14].
 Esta configuracion consistia principalmente en las claves para los modos privilegiados, el nombre y el mensaje del dispositivo, la creacion de las VLANs con su nombre, sus interfaces y la IP para la VLAN nativa(VLAN 99)
 A cada una de estas VLANs se les asigna unos determinados puertos del Switch y su modo, siendo de acceso, o para las VLAN nativa, truncado.
-Para el router, se crea una interfaz que se asocia en al puerto conectado al switch de nuestra LAN, y unas subinterfacez con la encapsulation dot1q, que se asocian a cada VLAN de nuestra Red LAN.
+Para el router, se crea una interfaz que se asocia en al puerto conectado al switch de nuestra LAN, y unas subinterfacez con la encapsulation dot1q, para su comunicacion y distribucion entre VLANs en interfaces entre los Switches y los routers, que se asocian a cada VLAN de nuestras Redes LAN.
+Ademas Se activa el enrutamiento con el protocolo EIGRP ##(su "identificador" de conexion), que debe ser el mismo para todos los routers y se declara las redes que esten conectadas a cada uno de los Routers con una IP especifica.
+
+#### ¿Se requiere asignación dinámica y/o estática?¿Dónde?¿Traducción de direcciones de forma dinámica y/o estático y/o por puertos? ¿En qué terminales se deben configurar los servicios requeridos?
+5.  Se requiere tanto asignación dinámica como estática. En la red en la cuál están los servidores DNS y HTTP es recomendable usar una asignación estática, ya que dentro de la topología y el problema planteado no se contempla la necesidad de  como si ocurre tanto en las redes de Bogotá y Madrid, en las cuales existe hasta una subred para los invitados, lo cuál indica que lo más óptimo esa hacer uso de la asignación dinámica a través de DHCP. Por esta razon implementamos tambien el servidor DHCP en la Intranet de Madrid, realizando una leve modificacion a la topoligia
+
+En el servidor WEB se alojo la Pagina de los Julianes con las especificaciones del cliente, siendo: www.jdagjcdvjapa.com, esta pagina y su dominio es gestionada por el Servidor DNS.
+
+Los usuaruos de la Intranet Bogota efectivamente Ingresan a la pagina WEB por el protocolo HTTPs(puerto 433) y no por el protocolo HTTP(puerto 80) (PC1) :
+![image](https://github.com/julian2308/LabRedes1/assets/88839459/94b21d78-2f0c-42e8-a636-a2902ab9d9bc)
+![image](https://github.com/julian2308/LabRedes1/assets/88839459/c7444ab4-a488-416e-9c0f-5b45a58bf714)
+
+Y verificamos por paquetes que se hace una solicitud HTTPS por el puerto 443:
+![image](https://github.com/julian2308/LabRedes1/assets/88839459/c9c44e7a-4832-4057-9696-29980340545b)
+
+Mientras que los invitados ingresan viceversa:
+![image](https://github.com/julian2308/LabRedes1/assets/88839459/8df513be-69e5-40ec-97ac-7fecc028f2dd)
+Y los Invitados de la intranet Madrid no pueden entrar por ninguno de los 2 protocolos
+
+Estas especificaciones fueron solicitadas por el cliente
 
 
-5. Se requiere tanto asignación dinámica como estática. En la red en la cuál están los servidores DNS y HTTP es recomendable usar una asignación estática, ya que dentro de la topología y el problema planteado no se contempla la necesidad de  como si ocurre tanto en las redes de Bogotá y Madrid, en las cuales existe hasta una subred para los invitados, lo cuál indica que lo más óptimo esa hacer uso de la asignación dinámica a través de DHCP.
-6. Se configura el servicio de ACL(Access Control List) el cual nos permite permitir o denegar el paso de paquetes desde una red hacia otra, o por ip's específicas de dispositivos.
+#### Finalmente, los usuarios de la empresa en la Intranet Madrid sólo deben acceder al servidor Web por el puerto 443. ¿Qué servicio IPv4 se debe configurar?
 
-### METODOLOGÍA SEGUIDA.
+6.Se configura el servicio de ACL(Access Control List) el cual nos permite permitir o denegar el paso de paquetes desde una red hacia otra, o por ip's específicas de dispositivos.
+
+#### ¿Dónde se deben ubicar los ACLs?
+7. Los ACLs se ubicaron en los routers de Bogota y Madrid, ya que estos routers son los mas cercanos a los posibles destinos de los mensajes Externos, Siendo una configuracion ACL estandar.
+
+#### Enlace “Trunks”, IEEE 802.1q. ¿En qué interfaces se deben configurar OSPF o EIGRP (no RIP) y/o rutas
+estáticas?
+8. Se configuro el protocolo EIGRP en  todas las interfaces de los routers y multilayer switch, las rutas estaticas solo las definimos en Los servidores WEB y DNS.
+
+### Validacion
+
+
+### Marco Teorico
 
 * Red LAN: "Se conoce como red LAN (siglas del inglés: Local Área Network, que traduce Red de Área Local) a una red informática cuyo alcance se limita a un espacio físico reducido, como una casa, un departamento o a lo sumo un edificio" [1].
 * VLAN: "Las VLAN o también conocidas como «Virtual LAN» nos permite crear redes lógicamente independientes dentro de la misma red física, haciendo uso de switches gestionables que soportan VLANs para segmentar adecuadamente la red" [2]. Básicamente permiten segmentar una misma red apartir de un Switch, y tener distintas subredes.
