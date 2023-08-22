@@ -1,0 +1,226 @@
+!
+version 12.2(37)SE1
+no service timestamps log datetime msec
+no service timestamps debug datetime msec
+no service password-encryption
+!
+hostname SW2
+!
+!
+enable secret 5 $1$mERr$hx5rVt7rPNoS4wqbXKX7m0
+!
+!
+!
+!
+!
+ip routing
+!
+!
+!
+!
+!
+!
+!
+!
+!
+!
+!
+!
+!
+!
+!
+spanning-tree mode pvst
+!
+!
+!
+!
+!
+!
+interface FastEthernet0/1
+ switchport access vlan 99
+!
+interface FastEthernet0/2
+ switchport access vlan 99
+!
+interface FastEthernet0/3
+ no switchport
+ ip address 10.10.0.2 255.255.255.252
+ duplex auto
+ speed auto
+!
+interface FastEthernet0/4
+ switchport access vlan 99
+!
+interface FastEthernet0/5
+ switchport access vlan 10
+ switchport mode access
+ switchport nonegotiate
+!
+interface FastEthernet0/6
+ switchport access vlan 10
+ switchport mode access
+ switchport nonegotiate
+!
+interface FastEthernet0/7
+ switchport access vlan 10
+ switchport mode access
+ switchport nonegotiate
+!
+interface FastEthernet0/8
+ switchport access vlan 10
+ switchport mode access
+ switchport nonegotiate
+!
+interface FastEthernet0/9
+ switchport access vlan 10
+ switchport mode access
+ switchport nonegotiate
+!
+interface FastEthernet0/10
+ switchport access vlan 20
+ switchport mode access
+ switchport nonegotiate
+!
+interface FastEthernet0/11
+ switchport access vlan 20
+ switchport mode access
+ switchport nonegotiate
+!
+interface FastEthernet0/12
+ switchport access vlan 20
+ switchport mode access
+ switchport nonegotiate
+!
+interface FastEthernet0/13
+ switchport access vlan 20
+ switchport mode access
+ switchport nonegotiate
+!
+interface FastEthernet0/14
+ switchport access vlan 20
+ switchport mode access
+ switchport nonegotiate
+!
+interface FastEthernet0/15
+ switchport access vlan 20
+ switchport mode access
+ switchport nonegotiate
+!
+interface FastEthernet0/16
+ switchport access vlan 30
+ switchport mode access
+ switchport nonegotiate
+!
+interface FastEthernet0/17
+ switchport access vlan 30
+ switchport mode access
+ switchport nonegotiate
+!
+interface FastEthernet0/18
+ switchport access vlan 30
+ switchport mode access
+ switchport nonegotiate
+!
+interface FastEthernet0/19
+ switchport access vlan 30
+ switchport mode access
+ switchport nonegotiate
+!
+interface FastEthernet0/20
+ switchport access vlan 40
+ switchport mode access
+ switchport nonegotiate
+!
+interface FastEthernet0/21
+ switchport access vlan 40
+ switchport mode access
+ switchport nonegotiate
+!
+interface FastEthernet0/22
+ switchport access vlan 40
+ switchport mode access
+ switchport nonegotiate
+!
+interface FastEthernet0/23
+ switchport access vlan 40
+ switchport mode access
+ switchport nonegotiate
+!
+interface FastEthernet0/24
+ switchport access vlan 40
+ switchport mode access
+ switchport nonegotiate
+!
+interface GigabitEthernet0/1
+!
+interface GigabitEthernet0/2
+!
+interface Vlan1
+ no ip address
+ shutdown
+!
+interface Vlan10
+ mac-address 00e0.8f2d.d101
+ ip address 10.3.0.1 255.255.252.0
+ ip helper-address 10.3.5.2
+!
+interface Vlan20
+ mac-address 00e0.8f2d.d102
+ ip address 10.3.4.1 255.255.255.0
+ ip helper-address 10.3.5.2
+!
+interface Vlan30
+ mac-address 00e0.8f2d.d103
+ ip address 10.3.5.1 255.255.255.0
+ ip helper-address 10.3.5.2
+!
+interface Vlan40
+ mac-address 00e0.8f2d.d104
+ ip address 10.3.6.1 255.255.255.0
+ ip helper-address 10.3.5.2
+!
+interface Vlan99
+ mac-address 00e0.8f2d.d105
+ ip address 10.3.7.1 255.255.255.0
+ ip helper-address 10.3.5.2
+!
+router eigrp 1
+ network 10.10.0.0 0.0.0.255
+ auto-summary
+!
+router eigrp 10
+ network 10.0.0.0
+ auto-summary
+!
+router rip
+!
+ip default-gateway 10.10.0.1
+ip classless
+!
+ip flow-export version 9
+!
+!
+!
+banner motd #Soy MLSW2#
+!
+!
+!
+!
+!
+line con 0
+ password cisco
+!
+line aux 0
+!
+line vty 0 4
+ password cisco
+ login
+line vty 5 15
+ password cisco
+ login
+!
+!
+!
+!
+end
+

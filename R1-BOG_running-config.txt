@@ -1,0 +1,128 @@
+!
+version 15.1
+no service timestamps log datetime msec
+no service timestamps debug datetime msec
+no service password-encryption
+!
+hostname R1-BOG
+!
+!
+!
+!
+!
+!
+!
+!
+no ip cef
+no ipv6 cef
+!
+!
+!
+!
+license udi pid CISCO2811/K9 sn FTX10174259-
+!
+!
+!
+!
+!
+!
+!
+!
+!
+!
+!
+spanning-tree mode pvst
+!
+!
+!
+!
+!
+!
+interface FastEthernet0/0
+ ip address 161.130.4.1 255.255.255.0
+ ip access-group 102 out
+ duplex auto
+ speed auto
+!
+interface FastEthernet0/1
+ no ip address
+ ip helper-address 172.19.5.2
+ ip access-group 102 in
+ ip nat inside
+ duplex auto
+ speed auto
+!
+interface FastEthernet0/1.10
+ encapsulation dot1Q 10
+ ip address 172.19.0.1 255.255.252.0
+ ip helper-address 172.19.5.2
+!
+interface FastEthernet0/1.20
+ encapsulation dot1Q 20
+ ip address 172.19.4.1 255.255.255.0
+ ip helper-address 172.19.5.2
+ ip access-group 102 in
+!
+interface FastEthernet0/1.30
+ encapsulation dot1Q 30
+ ip address 172.19.5.1 255.255.255.0
+ ip helper-address 172.19.5.2
+!
+interface FastEthernet0/1.40
+ encapsulation dot1Q 40
+ ip address 172.19.6.1 255.255.255.0
+ ip helper-address 172.19.5.2
+!
+interface FastEthernet0/1.99
+ encapsulation dot1Q 99
+ ip address 172.19.7.1 255.255.255.0
+!
+interface Serial0/2/0
+ ip address 191.90.3.1 255.255.255.252
+ ip nat outside
+!
+interface Vlan1
+ no ip address
+ shutdown
+!
+router eigrp 10
+ network 191.90.0.0
+ network 161.130.0.0
+!
+ip classless
+!
+ip flow-export version 9
+!
+!
+access-list 101 deny tcp host 172.19.4.3 host 161.130.4.5 eq 443
+access-list 101 deny tcp host 172.19.4.2 host 161.130.4.5 eq 443
+access-list 101 permit ip any any
+access-list 102 deny tcp host 172.19.0.3 host 161.130.4.5 eq www
+access-list 102 deny tcp host 172.19.0.2 host 161.130.4.5 eq www
+access-list 102 permit ip any any
+access-list 1 permit any
+!
+no cdp run
+!
+banner motd #Soy R1-BOG#
+!
+!
+!
+!
+line con 0
+ password cisco
+ login
+!
+line aux 0
+!
+line vty 0 4
+ password cisco
+ login
+line vty 5 15
+ password cisco
+ login
+!
+!
+!
+end
+
